@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGNAYAN | Barangay Communication System</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Inter for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen active">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo-circle">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+                <h1>UGNAYAN</h1>
+                <p>Barangay Communication Module</p>
+            </div>
+            <div class="role-selection">
+                <h3>Select Your Role</h3>
+                <div class="role-buttons">
+                    <button class="role-btn" onclick="app.login('resident')">
+                        <i class="fas fa-user"></i>
+                        <span>Resident</span>
+                    </button>
+                    <button class="role-btn" onclick="app.login('admin')">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Administrator</span>
+                    </button>
+                </div>
+            </div>
+            <div class="login-footer">
+                <p>Empowering our community through better communication.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Layout -->
+    <div id="app-screen" class="screen">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-hands-helping"></i>
+                <span>UGNAYAN</span>
+            </div>
+            <nav class="sidebar-nav">
+                <!-- Resident Nav -->
+                <div id="resident-nav" class="nav-group">
+                    <button class="nav-item active" onclick="app.switchTab('new-message')">
+                        <i class="fas fa-paper-plane"></i> <span>Send Message</span>
+                    </button>
+                    <button class="nav-item" onclick="app.switchTab('history')">
+                        <i class="fas fa-history"></i> <span>My History</span>
+                    </button>
+                    <button class="nav-item" onclick="app.switchTab('feedback')">
+                        <i class="fas fa-star"></i> <span>Feedback</span>
+                    </button>
+                </div>
+                <!-- Admin Nav -->
+                <div id="admin-nav" class="nav-group hidden">
+                    <button class="nav-item active" onclick="app.switchTab('inbox')">
+                        <i class="fas fa-inbox"></i> <span>Inbox</span>
+                    </button>
+                    <button class="nav-item" onclick="app.switchTab('broadcast')">
+                        <i class="fas fa-bullhorn"></i> <span>Broadcast</span>
+                    </button>
+                    <button class="nav-item" onclick="app.switchTab('logs')">
+                        <i class="fas fa-list-alt"></i> <span>System Logs</span>
+                    </button>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar" id="user-avatar-initial">U</div>
+                    <div class="user-details">
+                        <span id="user-role-display">User</span>
+                        <small>Online</small>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="app.logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <header class="content-header">
+                <h2 id="tab-title">Dashboard</h2>
+                <div class="header-actions">
+                    <span id="current-date"></span>
+                </div>
+            </header>
+
+            <div class="tab-content" id="main-content-area">
+                <!-- RESIDENT TABS -->
+                <!-- New Message Tab -->
+                <section id="tab-new-message" class="tab-pane active">
+                    <div class="card">
+                        <h3>Send an Inquiry or Report</h3>
+                        <p>Select a category and describe your concern clearly.</p>
+                        <form id="message-form" onsubmit="app.sendMessage(event)">
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="msg-category" required>
+                                    <option value="" disabled selected>Choose a category...</option>
+                                    <option value="Complaint">Complaint</option>
+                                    <option value="Request">Request</option>
+                                    <option value="Inquiry">Inquiry</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Your Message</label>
+                                <textarea id="msg-content" placeholder="Type your message here..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- History Tab -->
+                <section id="tab-history" class="tab-pane">
+                    <div class="chat-container" id="resident-chat-history">
+                        <!-- Messages will be loaded here -->
+                        <div class="empty-state">
+                            <i class="fas fa-comments"></i>
+                            <p>No messages yet. Start a conversation!</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Feedback Tab -->
+                <section id="tab-feedback" class="tab-pane">
+                    <div class="card">
+                        <h3>Community Feedback</h3>
+                        <p>How can we improve our services?</p>
+                        <form id="feedback-form" onsubmit="app.submitFeedback(event)">
+                            <div class="form-group">
+                                <label>Rating</label>
+                                <div class="rating-stars">
+                                    <input type="radio" name="rating" value="5" id="star5"><label for="star5">★</label>
+                                    <input type="radio" name="rating" value="4" id="star4"><label for="star4">★</label>
+                                    <input type="radio" name="rating" value="3" id="star3"><label for="star3">★</label>
+                                    <input type="radio" name="rating" value="2" id="star2"><label for="star2">★</label>
+                                    <input type="radio" name="rating" value="1" id="star1"><label for="star1">★</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Comments</label>
+                                <textarea id="feedback-content" placeholder="Share your thoughts..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">Submit Feedback</button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- ADMIN TABS -->
+                <!-- Inbox Tab -->
+                <section id="tab-inbox" class="tab-pane">
+                    <div class="admin-inbox-layout">
+                        <div class="message-list" id="admin-message-list">
+                            <!-- Message list items -->
+                        </div>
+                        <div class="message-detail" id="admin-message-detail">
+                            <div class="empty-state">
+                                <i class="fas fa-envelope-open"></i>
+                                <p>Select a message to view details and reply.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Broadcast Tab -->
+                <section id="tab-broadcast" class="tab-pane">
+                    <div class="card">
+                        <h3>Send Broadcast Announcement</h3>
+                        <p>This message will be visible to all residents.</p>
+                        <form id="broadcast-form" onsubmit="app.sendBroadcast(event)">
+                            <div class="form-group">
+                                <label>Announcement Title</label>
+                                <input type="text" id="broadcast-title" placeholder="e.g., General Assembly" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Content</label>
+                                <textarea id="broadcast-content" placeholder="Type the announcement details..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-accent">
+                                <i class="fas fa-bullhorn"></i> Post Announcement
+                            </button>
+                        </form>
+                    </div>
+                    <div class="card mt-20">
+                        <h3>Recent Broadcasts</h3>
+                        <div id="broadcast-history-list">
+                            <!-- Broadcasts will be listed here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Logs Tab -->
+                <section id="tab-logs" class="tab-pane">
+                    <div class="card">
+                        <div class="card-header-flex">
+                            <h3>Communication Logs</h3>
+                            <button class="btn-outline btn-sm" onclick="app.clearLogs()">Clear Logs</button>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Timestamp</th>
+                                        <th>User</th>
+                                        <th>Action</th>
+                                        <th>Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="logs-table-body">
+                                    <!-- Logs will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Message sent successfully!</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
