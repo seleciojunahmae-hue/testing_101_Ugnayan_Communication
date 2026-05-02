@@ -1,0 +1,553 @@
+/* ============================================
+   Barangay Communication Module - Animations
+   ============================================ */
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Fade Out Animation */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Slide In From Left */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide In From Right */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide In From Top */
+@keyframes slideInTop {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide In From Bottom */
+@keyframes slideInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scale In Animation */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Shake Animation */
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+/* Rotate Animation */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Glow Animation */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(220, 20, 60, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(220, 20, 60, 0.8);
+  }
+}
+
+/* Message Bubble Animation */
+@keyframes messageBubbleIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Notification Badge Animation */
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Modal Slide In */
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Modal Slide Out */
+@keyframes modalSlideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.95);
+  }
+}
+
+/* Button Hover Animation */
+@keyframes buttonHover {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Button Press Animation */
+@keyframes buttonPress {
+  0% {
+    transform: translateY(-2px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Notification Slide In */
+@keyframes notificationSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Notification Slide Out */
+@keyframes notificationSlideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* Loading Spinner */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Shimmer Loading Effect */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Color Transition */
+@keyframes colorTransition {
+  0% {
+    background-color: var(--white);
+  }
+  50% {
+    background-color: var(--light-red);
+  }
+  100% {
+    background-color: var(--white);
+  }
+}
+
+/* Expand Animation */
+@keyframes expand {
+  from {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+  to {
+    max-height: 1000px;
+    opacity: 1;
+    overflow: visible;
+  }
+}
+
+/* Collapse Animation */
+@keyframes collapse {
+  from {
+    max-height: 1000px;
+    opacity: 1;
+    overflow: hidden;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+}
+
+/* Apply animations to elements */
+
+.message-item {
+  animation: slideInLeft 0.3s ease-out;
+}
+
+.announcement-card {
+  animation: slideInBottom 0.4s ease-out;
+}
+
+.message-bubble {
+  animation: messageBubbleIn 0.3s ease-out;
+}
+
+.notification-badge {
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+.modal-content {
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+.action-btn:hover {
+  animation: buttonHover 0.2s ease-out forwards;
+}
+
+.action-btn:active {
+  animation: buttonPress 0.1s ease-out forwards;
+}
+
+.send-btn:hover {
+  animation: buttonHover 0.2s ease-out forwards;
+}
+
+.send-btn:active {
+  animation: buttonPress 0.1s ease-out forwards;
+}
+
+.new-message-btn:hover {
+  animation: buttonHover 0.2s ease-out forwards;
+}
+
+.new-message-btn:active {
+  animation: buttonPress 0.1s ease-out forwards;
+}
+
+.form-submit-btn:hover {
+  animation: buttonHover 0.2s ease-out forwards;
+}
+
+.form-submit-btn:active {
+  animation: buttonPress 0.1s ease-out forwards;
+}
+
+/* Transition effects */
+
+.tab {
+  transition: all 0.3s ease;
+}
+
+.tab-btn {
+  transition: all 0.3s ease;
+}
+
+.message-item {
+  transition: all 0.3s ease;
+}
+
+.announcement-card {
+  transition: all 0.3s ease;
+}
+
+.action-btn {
+  transition: all 0.3s ease;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  transition: all 0.3s ease;
+}
+
+.icon-button {
+  transition: all 0.3s ease;
+}
+
+.user-profile {
+  transition: all 0.3s ease;
+}
+
+/* Loading state animations */
+
+.loading {
+  animation: spin 1s linear infinite;
+}
+
+.shimmer-loading {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(
+    90deg,
+    var(--light-gray) 25%,
+    var(--medium-gray) 50%,
+    var(--light-gray) 75%
+  );
+  background-size: 1000px 100%;
+}
+
+/* Hover effects */
+
+.message-item:hover {
+  animation: none;
+  transform: translateX(5px);
+}
+
+.announcement-card:hover {
+  animation: none;
+  transform: translateY(-5px);
+}
+
+/* Focus effects */
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  animation: glow 0.5s ease-out;
+}
+
+/* Success animation */
+
+@keyframes successCheckmark {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.success-checkmark {
+  animation: successCheckmark 0.5s ease-out;
+}
+
+/* Error animation */
+
+@keyframes errorShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+.error-shake {
+  animation: errorShake 0.5s ease-out;
+}
+
+/* Responsive animations */
+
+@media (max-width: 768px) {
+  .message-item {
+    animation: slideInBottom 0.3s ease-out;
+  }
+
+  .announcement-card {
+    animation: slideInBottom 0.4s ease-out;
+  }
+
+  .modal-content {
+    animation: slideInBottom 0.3s ease-out;
+  }
+}
+
+/* Accessibility - Respect prefers-reduced-motion */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Smooth transitions for theme changes */
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.main-content {
+  transition: background-color 0.3s ease;
+}
+
+.top-bar {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Stagger animations for lists */
+
+.message-item:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.message-item:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.message-item:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.message-item:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.message-item:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+.announcement-card:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.announcement-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.announcement-card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+/* Smooth page transitions */
+
+.page-transition {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Tooltip animations */
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tooltip {
+  animation: tooltipFadeIn 0.2s ease-out;
+}

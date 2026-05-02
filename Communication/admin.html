@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barangay Communication Module - Admin View</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">📬</div>
+          <span>Barangay Comm</span>
+        </div>
+      </div>
+
+      <div class="filter-tabs">
+        <button class="tab-btn active" data-filter="all">All (12)</button>
+        <button class="tab-btn" data-filter="unread">Unread (3)</button>
+        <button class="tab-btn" data-filter="replied">Replied (8)</button>
+        <button class="tab-btn" data-filter="pending">Pending (1)</button>
+      </div>
+
+      <div class="message-list" id="messageList"></div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <!-- TOP BAR -->
+      <div class="top-bar">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div class="search-box">
+            <span style="color: var(--text-gray);">🔍</span>
+            <input type="text" placeholder="Search messages...">
+          </div>
+        </div>
+
+        <div class="top-bar-right">
+          <button class="icon-button" title="Notifications">
+            🔔
+            <span class="notification-badge">5</span>
+          </button>
+          <button class="icon-button" title="Settings">⚙️</button>
+          <div class="user-profile">
+            <div class="avatar">BA</div>
+            <div class="user-info">
+              <div class="user-name">Barangay Admin</div>
+              <div class="user-role">Administrator</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN TOOLBAR -->
+      <div class="admin-toolbar">
+        <div class="toolbar-group">
+          <button class="action-btn primary" id="broadcastBtn">📢 Broadcast</button>
+          <button class="action-btn">🔄 Refresh</button>
+        </div>
+        <div class="toolbar-group">
+          <label style="font-size: 13px; color: var(--text-gray);">Filter:</label>
+          <select class="filter-dropdown" id="categoryFilter">
+            <option value="">All Categories</option>
+            <option value="complaint">Complaint</option>
+            <option value="request">Request</option>
+            <option value="inquiry">Inquiry</option>
+            <option value="feedback">Feedback</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="tabs-container">
+        <div class="tab active" data-tab="inbox">📥 Inbox</div>
+        <div class="tab" data-tab="logs">📋 Communication Logs</div>
+        <div class="tab" data-tab="templates">📝 Quick Replies</div>
+      </div>
+
+      <!-- TAB CONTENT -->
+      <div class="content-area">
+        <!-- INBOX TAB -->
+        <div id="inboxTab" class="tab-content active" style="display: flex; flex-direction: column;">
+          <div class="message-list-container">
+            <div class="message-list" id="adminMessageList"></div>
+          </div>
+
+          <div class="chat-container">
+            <div class="chat-header">
+              <div class="chat-header-info">
+                <div class="message-item-avatar">MS</div>
+                <div class="chat-header-details">
+                  <h3>Select a message</h3>
+                  <p>No message selected</p>
+                </div>
+              </div>
+              <div class="chat-header-actions">
+                <button class="action-btn">🏷️ Label</button>
+                <button class="action-btn">📌 Archive</button>
+                <button class="action-btn">🗑️ Delete</button>
+              </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+              <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-gray);">
+                <p>Select a message to view conversation</p>
+              </div>
+            </div>
+
+            <div class="chat-input-area">
+              <div class="input-wrapper">
+                <button class="icon-button" style="font-size: 18px;" id="quickReplyBtn" title="Quick Reply">⚡</button>
+                <textarea id="messageInput" class="message-input" placeholder="Type your reply..." rows="1"></textarea>
+              </div>
+              <button id="sendBtn" class="send-btn">Send</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- COMMUNICATION LOGS TAB -->
+        <div id="logsTab" class="tab-content" style="flex-direction: column;">
+          <div style="flex: 1; overflow-y: auto; padding: 24px;">
+            <div class="communication-log">
+              <div class="log-header">
+                <div>Resident Name</div>
+                <div>Category</div>
+                <div>Message</div>
+                <div>Timestamp</div>
+                <div>Status</div>
+              </div>
+              <div id="logContainer"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUICK REPLIES TAB -->
+        <div id="templatesTab" class="tab-content" style="flex-direction: column;">
+          <div style="flex: 1; overflow-y: auto; padding: 24px;">
+            <div style="max-width: 800px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="font-size: 16px; font-weight: 600; color: var(--dark-gray);">Quick Reply Templates</h3>
+                <button class="action-btn primary" id="addTemplateBtn">+ Add Template</button>
+              </div>
+
+              <div id="templatesContainer"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BROADCAST MODAL -->
+  <div id="broadcastModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span>Broadcast Message</span>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="broadcastTitle">Title</label>
+          <input type="text" id="broadcastTitle" class="form-input" placeholder="Announcement title..." required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="broadcastCategory">Category</label>
+          <select id="broadcastCategory" class="form-select" required>
+            <option value="">Select category</option>
+            <option value="announcement">Announcement</option>
+            <option value="alert">Alert</option>
+            <option value="event">Event</option>
+            <option value="healthcare">Healthcare</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="broadcastMessage">Message</label>
+          <textarea id="broadcastMessage" class="form-textarea" placeholder="Type your broadcast message..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="broadcastRecipients">Send to</label>
+          <select id="broadcastRecipients" class="form-select" required>
+            <option value="all">All Residents</option>
+            <option value="specific">Specific Category</option>
+            <option value="group">Specific Group</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="action-btn" onclick="document.getElementById('broadcastModal').classList.remove('active')">Cancel</button>
+        <button class="action-btn primary" onclick="sendBroadcast()">Send Broadcast</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK REPLY MODAL -->
+  <div id="quickReplyModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span>Quick Reply Templates</span>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="quickRepliesContainer"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD TEMPLATE MODAL -->
+  <div id="addTemplateModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span>Add Quick Reply Template</span>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="templateName">Template Name</label>
+          <input type="text" id="templateName" class="form-input" placeholder="e.g., Complaint Acknowledgment" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="templateContent">Template Content</label>
+          <textarea id="templateContent" class="form-textarea" placeholder="Type the template content..." required></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="action-btn" onclick="document.getElementById('addTemplateModal').classList.remove('active')">Cancel</button>
+        <button class="action-btn primary" onclick="addTemplate()">Save Template</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

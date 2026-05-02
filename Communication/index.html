@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barangay Communication Module - Resident View</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">📬</div>
+          <span>Barangay Comm</span>
+        </div>
+        <button class="new-message-btn" id="newMessageBtn">+ New Message</button>
+      </div>
+
+      <div class="filter-tabs">
+        <button class="tab-btn active" data-filter="all">All</button>
+        <button class="tab-btn" data-filter="complaint">Complaint</button>
+        <button class="tab-btn" data-filter="request">Request</button>
+        <button class="tab-btn" data-filter="inquiry">Inquiry</button>
+      </div>
+
+      <div class="message-list" id="messageList"></div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <!-- TOP BAR -->
+      <div class="top-bar">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div class="search-box">
+            <span style="color: var(--text-gray);">🔍</span>
+            <input type="text" placeholder="Search messages...">
+          </div>
+        </div>
+
+        <div class="top-bar-right">
+          <button class="icon-button" title="Notifications">
+            🔔
+            <span class="notification-badge">3</span>
+          </button>
+          <button class="icon-button" title="Settings">⚙️</button>
+          <div class="user-profile">
+            <div class="avatar">JD</div>
+            <div class="user-info">
+              <div class="user-name">Juan Dela Cruz</div>
+              <div class="user-role">Resident</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="tabs-container">
+        <div class="tab active" data-tab="messages">📩 My Messages</div>
+        <div class="tab" data-tab="announcements">📢 Announcements</div>
+        <div class="tab" data-tab="feedback">⭐ Feedback</div>
+      </div>
+
+      <!-- TAB CONTENT -->
+      <div class="content-area">
+        <!-- MESSAGES TAB -->
+        <div id="messagesTab" class="tab-content active" style="display: flex; flex-direction: column;">
+          <div class="message-list-container">
+            <div class="message-list" id="messageList"></div>
+          </div>
+
+          <div class="chat-container">
+            <div class="chat-header">
+              <div class="chat-header-info">
+                <div class="message-item-avatar">MS</div>
+                <div class="chat-header-details">
+                  <h3>Select a message</h3>
+                  <p>No message selected</p>
+                </div>
+              </div>
+              <div class="chat-header-actions">
+                <button class="action-btn">📌 Archive</button>
+                <button class="action-btn">🗑️ Delete</button>
+              </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+              <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-gray);">
+                <p>Select a message to view conversation</p>
+              </div>
+            </div>
+
+            <div class="chat-input-area">
+              <div class="input-wrapper">
+                <button class="icon-button" style="font-size: 18px;">📎</button>
+                <textarea id="messageInput" class="message-input" placeholder="Type your message here..." rows="1"></textarea>
+              </div>
+              <button id="sendBtn" class="send-btn">Send</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ANNOUNCEMENTS TAB -->
+        <div id="announcementsTab" class="tab-content" style="flex-direction: column;">
+          <div style="flex: 1; overflow-y: auto; padding: 24px;">
+            <div id="announcementsContainer"></div>
+          </div>
+        </div>
+
+        <!-- FEEDBACK TAB -->
+        <div id="feedbackTab" class="tab-content" style="flex-direction: column;">
+          <div style="flex: 1; overflow-y: auto; padding: 24px;">
+            <form id="feedbackForm" class="feedback-form">
+              <div class="form-group">
+                <label class="form-label">How would you rate your experience?</label>
+                <div class="rating-container">
+                  <span class="rating-star" data-rating="1">⭐</span>
+                  <span class="rating-star" data-rating="2">⭐</span>
+                  <span class="rating-star" data-rating="3">⭐</span>
+                  <span class="rating-star" data-rating="4">⭐</span>
+                  <span class="rating-star" data-rating="5">⭐</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="feedbackCategory">Category</label>
+                <select id="feedbackCategory" class="form-select" required>
+                  <option value="">Select a category</option>
+                  <option value="service">Service Quality</option>
+                  <option value="response-time">Response Time</option>
+                  <option value="staff">Staff Behavior</option>
+                  <option value="facilities">Facilities</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="feedbackComment">Your Feedback</label>
+                <textarea id="feedbackComment" class="form-textarea" placeholder="Please share your feedback..." required></textarea>
+              </div>
+
+              <button type="submit" class="form-submit-btn">Submit Feedback</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW MESSAGE MODAL -->
+  <div id="newMessageModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span>New Message</span>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="recipientSelect">Send to</label>
+          <select id="recipientSelect" class="form-select" required>
+            <option value="">Select recipient</option>
+            <option value="barangay">Barangay Office</option>
+            <option value="admin">Barangay Administrator</option>
+            <option value="health">Health Center</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="categorySelect">Category</label>
+          <select id="categorySelect" class="form-select" required>
+            <option value="">Select category</option>
+            <option value="complaint">Complaint</option>
+            <option value="request">Request</option>
+            <option value="inquiry">Inquiry</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="messageText">Message</label>
+          <textarea id="messageText" class="form-textarea" placeholder="Type your message..." required></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="action-btn" onclick="document.getElementById('newMessageModal').classList.remove('active')">Cancel</button>
+        <button class="action-btn primary" onclick="sendNewMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Additional resident-specific functions
+    function sendNewMessage() {
+      const recipient = document.getElementById('recipientSelect').value;
+      const category = document.getElementById('categorySelect').value;
+      const message = document.getElementById('messageText').value;
+
+      if (!recipient || !category || !message) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      alert('Message sent successfully!');
+      document.getElementById('newMessageModal').classList.remove('active');
+      document.getElementById('messageText').value = '';
+      document.getElementById('recipientSelect').value = '';
+      document.getElementById('categorySelect').value = '';
+    }
+
+    // Auto-adjust textarea height
+    const messageInput = document.getElementById('messageInput');
+    if (messageInput) {
+      messageInput.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+      });
+    }
+  </script>
+</body>
+</html>
