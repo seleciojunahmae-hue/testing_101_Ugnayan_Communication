@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Messages - Ugnayan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar for Message List -->
+        <aside class="message-sidebar">
+            <div class="sidebar-header">
+                <h2>Messages</h2>
+                <button id="new-message-btn" class="btn-primary"><i class="fas fa-plus"></i> New</button>
+            </div>
+            <div class="search-filter-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-messages" placeholder="Search residents...">
+                </div>
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">All</button>
+                    <button class="filter-tab" data-filter="unread">Unread</button>
+                    <button class="filter-tab" data-filter="replied">Replied</button>
+                </div>
+            </div>
+            <div id="message-list" class="message-list">
+                <!-- Messages will be populated here -->
+            </div>
+        </aside>
+
+        <!-- Main Content for Message Detail -->
+        <main class="message-detail">
+            <div id="no-selection" class="empty-state">
+                <i class="far fa-comments"></i>
+                <p>Select a conversation to start messaging</p>
+            </div>
+            
+            <div id="conversation-view" class="conversation-view hidden">
+                <header class="conversation-header">
+                    <div class="user-info">
+                        <div class="avatar" id="active-avatar">JD</div>
+                        <div>
+                            <h3 id="active-user-name">John Doe</h3>
+                            <span class="status-online">Resident • Purok 1</span>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <button id="delete-convo-btn" class="btn-icon" title="Delete Conversation"><i class="far fa-trash-alt"></i></button>
+                    </div>
+                </header>
+                
+                <div id="chat-history" class="chat-history">
+                    <!-- Chat bubbles will be populated here -->
+                </div>
+                
+                <footer class="chat-input-area">
+                    <div class="input-wrapper">
+                        <textarea id="reply-input" placeholder="Type your reply here..." rows="1"></textarea>
+                        <button id="send-reply-btn" class="btn-send"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </footer>
+            </div>
+        </main>
+    </div>
+
+    <!-- New Message Modal -->
+    <div id="new-message-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>New Message</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="new-message-form">
+                <div class="form-group">
+                    <label for="recipient">Recipient</label>
+                    <select id="recipient" required>
+                        <option value="">Select Resident</option>
+                        <option value="John Doe">John Doe (Purok 1)</option>
+                        <option value="Maria Santos">Maria Santos (Purok 3)</option>
+                        <option value="Juan Dela Cruz">Juan Dela Cruz (Purok 2)</option>
+                        <option value="Elena Reyes">Elena Reyes (Purok 4)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message-body">Message</label>
+                    <textarea id="message-body" rows="5" placeholder="Write your message..." required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary close-modal">Cancel</button>
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
