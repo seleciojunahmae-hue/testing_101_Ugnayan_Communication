@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ugnayan - Resident Communication</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Top Navigation -->
+        <header class="top-nav">
+            <div class="nav-left">
+                <div class="logo-container">
+                    <img src="https://img.icons8.com/ios-filled/50/800000/shield.png" alt="Logo" class="nav-logo">
+                    <span class="system-name">UGNAYAN</span>
+                </div>
+                <div class="breadcrumb">
+                    <span>Resident Portal</span>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="current-page">Messages & Alerts</span>
+                </div>
+            </div>
+            <div class="nav-right">
+                <div class="nav-icons">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">2</span>
+                </div>
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?name=Juan+Dela+Cruz&background=800000&color=fff" alt="User">
+                    <span class="user-name">Juan Dela Cruz</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </header>
+
+        <main class="content">
+            <div class="module-header">
+                <h1>Communication Center</h1>
+                <div class="tab-controls">
+                    <button class="tab-btn active" data-tab="announcements">Announcements</button>
+                    <button class="tab-btn" data-tab="messages">My Messages</button>
+                    <button class="tab-btn" data-tab="feedback">Feedback</button>
+                </div>
+            </div>
+
+            <!-- Announcements Tab -->
+            <section id="announcements-tab" class="tab-content active">
+                <div class="announcement-grid" id="announcement-list">
+                    <!-- Announcement cards will be injected here -->
+                </div>
+            </section>
+
+            <!-- My Messages Tab -->
+            <section id="messages-tab" class="tab-content">
+                <div class="messaging-layout">
+                    <div class="message-sidebar">
+                        <div class="search-bar">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search conversations...">
+                        </div>
+                        <div class="message-list" id="resident-message-list">
+                            <!-- Message items will be injected here -->
+                        </div>
+                    </div>
+                    <div class="message-detail" id="message-detail-view">
+                        <div class="empty-state">
+                            <i class="fas fa-envelope-open"></i>
+                            <p>Select a conversation to view</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="fab" id="new-msg-btn"><i class="fas fa-paper-plane"></i></button>
+            </section>
+
+            <!-- Feedback Tab -->
+            <section id="feedback-tab" class="tab-content">
+                <div class="feedback-container">
+                    <div class="feedback-form-card">
+                        <h2>Submit Feedback / Complaint</h2>
+                        <p class="subtitle">Your feedback helps us improve our barangay services.</p>
+                        <form id="feedback-form">
+                            <div class="form-group">
+                                <label>Rating</label>
+                                <div class="star-rating">
+                                    <i class="fas fa-star" data-rating="1"></i>
+                                    <i class="fas fa-star" data-rating="2"></i>
+                                    <i class="fas fa-star" data-rating="3"></i>
+                                    <i class="fas fa-star" data-rating="4"></i>
+                                    <i class="fas fa-star" data-rating="5"></i>
+                                </div>
+                                <input type="hidden" id="rating-value" value="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="fb-category" required>
+                                    <option value="">Select a category...</option>
+                                    <option value="Service">General Service</option>
+                                    <option value="Infrastructure">Infrastructure</option>
+                                    <option value="Security">Security/Peace & Order</option>
+                                    <option value="Health">Health Services</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Your Comments / Suggestions</label>
+                                <textarea id="fb-content" rows="6" placeholder="Please provide details..." required></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">Submit Feedback</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="feedback-history">
+                        <h2>My Recent Submissions</h2>
+                        <div class="history-list" id="fb-history-list">
+                            <!-- History items will be injected here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Modals -->
+        <div id="new-msg-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Message Barangay Admin</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <form id="new-msg-form">
+                    <div class="form-group">
+                        <label>Subject:</label>
+                        <input type="text" id="msg-subject" placeholder="What is this about?" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message:</label>
+                        <textarea id="new-msg-body" rows="5" placeholder="Type your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

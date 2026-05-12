@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ugnayan - Admin Communication</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Top Navigation -->
+        <header class="top-nav">
+            <div class="nav-left">
+                <div class="logo-container">
+                    <img src="https://img.icons8.com/ios-filled/50/800000/shield.png" alt="Logo" class="nav-logo">
+                    <span class="system-name">UGNAYAN</span>
+                </div>
+                <div class="breadcrumb">
+                    <span>Admin Portal</span>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="current-page">Communication</span>
+                </div>
+            </div>
+            <div class="nav-right">
+                <div class="nav-icons">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </div>
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?name=Admin+Bayot&background=800000&color=fff" alt="User">
+                    <span class="user-name">Admin Bayot</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </header>
+
+        <main class="content">
+            <div class="module-header">
+                <h1>Communication Center</h1>
+                <div class="tab-controls">
+                    <button class="tab-btn active" data-tab="messages">Messages</button>
+                    <button class="tab-btn" data-tab="broadcast">Broadcast</button>
+                </div>
+            </div>
+
+            <!-- Messages Tab -->
+            <section id="messages-tab" class="tab-content active">
+                <div class="messaging-layout">
+                    <div class="message-sidebar">
+                        <div class="search-bar">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search messages...">
+                        </div>
+                        <div class="filter-bar">
+                            <select id="msg-filter">
+                                <option value="all">All Messages</option>
+                                <option value="unread">Unread</option>
+                                <option value="replied">Replied</option>
+                            </select>
+                        </div>
+                        <div class="message-list" id="admin-message-list">
+                            <!-- Message items will be injected here -->
+                        </div>
+                    </div>
+                    <div class="message-detail" id="message-detail-view">
+                        <div class="empty-state">
+                            <i class="fas fa-comments"></i>
+                            <p>Select a message to view the conversation</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="fab" id="new-msg-btn"><i class="fas fa-plus"></i></button>
+            </section>
+
+            <!-- Broadcast Tab -->
+            <section id="broadcast-tab" class="tab-content">
+                <div class="broadcast-container">
+                    <div class="broadcast-form-card">
+                        <h2>Create New Broadcast</h2>
+                        <form id="broadcast-form">
+                            <div class="form-group">
+                                <label>Broadcast Title</label>
+                                <input type="text" id="bc-title" placeholder="Enter title..." required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select id="bc-category">
+                                        <option value="Announcement">Announcement</option>
+                                        <option value="Alert">Alert</option>
+                                        <option value="Event">Event</option>
+                                        <option value="Health">Health</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Priority</label>
+                                    <select id="bc-priority">
+                                        <option value="Normal">Normal</option>
+                                        <option value="High">High</option>
+                                        <option value="Urgent">Urgent</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Recipients</label>
+                                <select id="bc-recipients">
+                                    <option value="all">All Residents</option>
+                                    <option value="purok1">Purok 1</option>
+                                    <option value="purok2">Purok 2</option>
+                                    <option value="purok3">Purok 3</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Message Content</label>
+                                <textarea id="bc-content" rows="5" placeholder="Type your broadcast message here..." required></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn-secondary" id="bc-preview">Preview</button>
+                                <button type="submit" class="btn-primary">Send Broadcast</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="broadcast-history">
+                        <h2>Recent Broadcasts</h2>
+                        <div class="history-list" id="bc-history-list">
+                            <!-- History items will be injected here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Modals -->
+        <div id="new-msg-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>New Message</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <form id="new-msg-form">
+                    <div class="form-group">
+                        <label>To:</label>
+                        <input type="text" id="recipient-name" placeholder="Resident name..." required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message:</label>
+                        <textarea id="new-msg-body" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
